@@ -77,6 +77,22 @@ yarn install
 yarn start
 ```
 
+### Deploy to gh-pages
+
+```bash
+npm run deploy
+```
+
+> If this does not work for you add 
+
+```
+[alias]
+    stpp = subtree push --prefix
+```
+
+to ~/.gitconfig
+
+
 ## GRASS GIS Download
 
 Download: [GRASS GIS](https://grass.osgeo.org/download/)
