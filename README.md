@@ -4,6 +4,9 @@
 
 ## Visualizes [SIMWE](https://ncsu-geoforall-lab.github.io/geospatial-modeling-course/grass/simwe.html) and the [HAND methodolgy](https://grasswiki.osgeo.org/wiki/From_GRASS_GIS_novice_to_power_user_(workshop_at_FOSS4G_Boston_2017)#Hydrology:_Estimating_inundation_extent_using_HAND_methodology) using sample datasets from GRASS GIS [North Carolina sample data set](https://grass.osgeo.org/download/sample-data/)
 
+
+## Demo: https://cwhite911.github.io/hydro-grass-viz/
+
 ---
 
 ### HAND Methodology 
