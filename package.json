@@ -1,0 +1,24 @@
+{
+  "name": "hydro-grass-viz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "dev": "parcel -p 1234 watch index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@turf/bbox-polygon": "6.0.1",
+    "deck.gl": "6.4.0",
+    "mapbox-gl": "0.53.0-beta.1",
+    "react": "16.7.0",
+    "react-dom": "16.7.0",
+    "react-map-gl": "4.0.10",
+    "react-mapbox-gl": "4.2.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "1.11.0"
+  }
+}

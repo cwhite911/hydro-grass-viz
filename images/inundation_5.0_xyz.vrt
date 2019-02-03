@@ -1,0 +1,8 @@
+<OGRVRTDataSource> 
+  <OGRVRTLayer name="inundation_5.0_xyz"> 
+    <SrcDataSource relativeToVRT="1">inundation_5.0_xyz.csv</SrcDataSource> 
+    <GeometryType>wkbPoint25D</GeometryType>
+    <LayerSRS>EPSG:3358</LayerSRS> 
+    <GeometryField encoding="PointFromColumns" x="x" y="y" z="z" reportSrcColumn="FALSE"/> 
+  </OGRVRTLayer> 
+</OGRVRTDataSource>
