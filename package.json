@@ -6,8 +6,9 @@
   "scripts": {
     "start": "parcel index.html",
     "dev": "parcel -p 1234 watch index.html",
-    "build": "parcel build index.html --out-dir docs --public-url ./",
-    "deploy": "./deploy.sh"
+    "build": "parcel build index.html --public-url ./hydro-grass-viz/",
+    "deploy": "./deploy.sh",
+    "gh-pages": "git stpp dist origin gh-pages"
   },
   "author": "",
   "license": "ISC",
