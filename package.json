@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel index.html",
     "dev": "parcel -p 1234 watch index.html",
-    "build": "parcel build index.js --public-url ./",
+    "build": "parcel build index.html --out-dir docs --public-url ./",
     "deploy": "./deploy.sh"
   },
   "author": "",
