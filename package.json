@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel index.html",
     "dev": "parcel -p 1234 watch index.html",
-    "build": "parcel build index.js --public-url /hydro-grass-viz/",
+    "build": "parcel build index.js --public-url ./",
     "deploy": "./deploy.sh"
   },
   "author": "",
