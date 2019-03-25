@@ -138,7 +138,7 @@ map.on('load', () => {
                     "type": "circle",
                     "paint": {
                     "circle-radius": 10,
-                    "circle-color": "#e00000"
+                    "circle-color": "#FFE100"
                     },
                     // "type": "symbol",
                     // "layout": {
