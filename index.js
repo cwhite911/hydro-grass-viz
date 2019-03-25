@@ -22,6 +22,7 @@ import {render} from 'react-dom';
 import {StaticMap} from 'react-map-gl';
 import DeckGL, {ScreenGridLayer} from 'deck.gl';
 import {isWebGL2} from 'luma.gl';
+import { arcgisToGeoJSON } from '@esri/arcgis-to-geojson-utils';
 
 
 mapboxgl.accessToken = process.env.MapboxAccessToken;
@@ -30,46 +31,47 @@ const map = new mapboxgl.Map({
     zoom: 12,
     center: [-78.6319,35.7099],
     pitch: 45,
-    style: 'mapbox://styles/mapbox/satellite-v9'
+    style: 'mapbox://styles/ctwhite/cjtnhxudz2j4l1fs74h5hygce',
+    hash: true
 }).addControl(new mapboxgl.NavigationControl());
 
 map.on('load', () => {
 
-    //Discharge GIF
-    var currentDischargeImage = 0;
-    var dischargeImages = [discharge020, discharge040, discharge060, discharge080, discharge100, discharge120];
-    function getDischargePath() {
-        return dischargeImages[currentDischargeImage];
-    }
-    
-    map.addSource('dischargeOverlay', {
-        type: 'image',
-        url: getDischargePath(),
-        coordinates: [
-            [-78.7746204947222, 35.8096093825],
-            [-78.6083031766667, 35.8096093825],
-            [-78.6083031766667, 35.6875072969444],
-            [-78.7746204947222, 35.6875072969444]    
-        ]
-     });
+    // //Discharge GIF
+    // var currentDischargeImage = 0;
+    // var dischargeImages = [discharge020, discharge040, discharge060, discharge080, discharge100, discharge120];
+    // function getDischargePath() {
+    //     return dischargeImages[currentDischargeImage];
+    // }
+ 
+    // map.addSource('dischargeOverlay', {
+    //     type: 'image',
+    //     url: getDischargePath(),
+    //     coordinates: [
+    //         [-78.7746204947222, 35.8096093825],
+    //         [-78.6083031766667, 35.8096093825],
+    //         [-78.6083031766667, 35.6875072969444],
+    //         [-78.7746204947222, 35.6875072969444]    
+    //     ]
+    //  });
 
-    map.addLayer({
-        "id": "dischargeOverlay",
-        "source": "dischargeOverlay",
-        "type": "raster",
-        "paint": {
-            "raster-opacity": 0.50,
-            "raster-fade-duration": 0
-        }
-    });
+    // map.addLayer({
+    //     "id": "dischargeOverlay",
+    //     "source": "dischargeOverlay",
+    //     "type": "raster",
+    //     "paint": {
+    //         "raster-opacity": 0.50,
+    //         "raster-fade-duration": 0
+    //     }
+    // });
 
-    setInterval(function() {
-        currentDischargeImage = currentDischargeImage + 1;
-        if (currentDischargeImage == 5) {
-            currentDischargeImage = 0;
-        }
-        map.getSource("dischargeOverlay").updateImage({ url: getDischargePath() });
-    }, 200);
+    // setInterval(function() {
+    //     currentDischargeImage = currentDischargeImage + 1;
+    //     if (currentDischargeImage == 5) {
+    //         currentDischargeImage = 0;
+    //     }
+    //     map.getSource("dischargeOverlay").updateImage({ url: getDischargePath() });
+    // }, 200);
 
     //Flooding GIF
     var frameCount = 10;
@@ -121,6 +123,43 @@ map.on('load', () => {
         }
     }
 
+      let levels = fetch('https://services1.arcgis.com/aT1T0pU1ZdpuDk1t/ArcGIS/rest/services/survey123_571499fe84ac4125abe48b793b9970a3_stakeholder/FeatureServer/0/query?f=json&returnGeometry=true&inSR=102100&outFields=*&outSR=4326&resultType=tile&where=1=1')
+        .then(res=> res.json())
+        .then(json=> arcgisToGeoJSON(json))
+        .then(levels=> {
+            console.log("levels",levels);
+            map.addSource('levels', {
+                "type": "geojson",
+                "data": levels
+                });
+                map.addLayer({
+                    "id": "levels",
+                    "source": "levels",
+                    "type": "circle",
+                    "paint": {
+                    "circle-radius": 10,
+                    "circle-color": "#e00000"
+                    },
+                    // "type": "symbol",
+                    // "layout": {
+                    //     "icon-image": "star-15",
+                    //     // "text-field": "{title}",
+                    //     "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                    //     "text-offset": [0, 0.6],
+                    //     "text-anchor": "top",
+                    //     "icon-color": "#e00000"
+                    //     }
+                });
+            return levels;
+        });
+        
+        
+
+
+       // Add the data to your map as a layer
+ 
+   
+
      map.addLayer({
         'id': '3d-buildings',
         'source': 'composite',
@@ -145,121 +184,6 @@ map.on('load', () => {
             'fill-extrusion-opacity': 0.8
             }
         }, labelLayerId);
-
-
-        map.addLayer({
-            'id': 'region',
-            'type': 'fill',
-            'source': {
-                'type': 'geojson',
-                'data': {
-                    'type': 'Feature',
-                    'geometry': {
-                        'type': 'Polygon',
-                        'coordinates': [
-                            [-78.7746204947222, 35.8096093825],
-                            [-78.6083031766667, 35.8096093825],
-                            [-78.6083031766667, 35.6875072969444],
-                            [-78.7746204947222, 35.6875072969444]  
-                        ]
-                    }
-                }
-            },
-            'layout': {},
-            'paint': {
-                'fill-color': '#088',
-                'fill-opacity': 0.8
-            }
-        });
+  
 
 });
-
-
-// import React, {Component} from 'react';
-// import {render} from 'react-dom';
-// import {StaticMap} from 'react-map-gl';
-// import DeckGL, {ScreenGridLayer} from 'deck.gl';
-// import {isWebGL2} from 'luma.gl';
-// import data from './images/inundation_grid.json';
-
-// // Set your mapbox token here
-// const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
-// let DATA_URL = data;
-// // Source data CSV
-
-
-
-// export const INITIAL_VIEW_STATE = {
-//   longitude: -73.75,
-//   latitude: 40.73,
-//   zoom: 9.6,
-//   maxZoom: 16,
-//   pitch: 0,
-//   bearing: 0
-// };
-
-// const colorRange = [
-//   [255, 255, 178, 25],
-//   [254, 217, 118, 85],
-//   [254, 178, 76, 127],
-//   [253, 141, 60, 170],
-//   [240, 59, 32, 212],
-//   [189, 0, 38, 255]
-// ];
-
-// export class App extends Component {
-//   _renderLayers() {
-//     const {data = DATA_URL, cellSize = 20, gpuAggregation = true, aggregation = 'Sum'} = this.props;
-
-//     return [
-//       new ScreenGridLayer({
-//         id: 'grid',
-//         data,
-//         getPosition: d => d.coordinates,
-//         getWeight: d => d.z,
-//         cellSizePixels: cellSize,
-//         colorRange,
-//         gpuAggregation,
-//         aggregation
-//       })
-//     ];
-//   }
-
-//   _onInitialized(gl) {
-//     if (!isWebGL2(gl)) {
-//       console.warn('GPU aggregation is not supported'); // eslint-disable-line
-//       if (this.props.disableGPUAggregation) {
-//         this.props.disableGPUAggregation();
-//       }
-//     }
-//   }
-
-//   render() {
-//     const {viewState, controller = true, baseMap = true} = this.props;
-
-//     return (
-//       <DeckGL
-//         layers={this._renderLayers()}
-//         initialViewState={INITIAL_VIEW_STATE}
-//         onWebGLInitialized={this._onInitialized.bind(this)}
-//         viewState={viewState}
-//         controller={controller}
-//       >
-//         {baseMap && (
-//           <StaticMap
-//             reuseMaps
-//             mapStyle="mapbox://styles/mapbox/dark-v9"
-//             preventStyleDiffing={true}
-//             mapboxApiAccessToken={MAPBOX_TOKEN}
-//           />
-//         )}
-//       </DeckGL>
-//     );
-//   }
-// }
-
-// render(<App />,   document.getElementById('app'));
-
-// export function renderToDOM(container) {
-//   render(<App />, container);
-// }

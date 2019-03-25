@@ -6,16 +6,58 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+    <link src='./marker.css' rel='stylesheet' />
     <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
+        /* body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; } */
+        body {
+            background: #404040;
+            color: #f8f8f8;
+            font: 500 20px/26px 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* The page is split between map and sidebar - the sidebar gets 1/3, map
+        gets 2/3 of the page. You can adjust this to your personal liking. */
+        .sidebar {
+            width: 33.3333%;
+        }
+
+        .map {
+            border-left: 1px solid #fff;
+            position: absolute;
+            left: 33.3333%;
+            width: 66.6666%;
+            top: 0;
+            bottom: 0;
+            }
+
+            .pad2 {
+            padding: 20px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            }
+
+
+        /* .marker {
+            border: none;
+            cursor: pointer;
+            height: 56px;
+            width: 56px;
+            background-image: url(marker.png);
+            background-color: rgba(224, 21, 21, 0.747);
+        } */
     </style>
 </head>
 <body>
+    
+    <div class='sidebar pad2'>TomorrowNow
 
-<!-- <div id='map'></div> -->
-<div id="app"></div>
-<div id="map"></div>
+    </div>
+    <div id='map' class='map pad2'>The Trident</div>
 <script src="./index.js"></script>
 <script type="text/javascript">
     // App.renderToDOM(document.getElementById('app'));
