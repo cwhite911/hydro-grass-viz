@@ -37,6 +37,60 @@ const map = new mapboxgl.Map({
 
 map.on('load', () => {
 
+    function setScaleForLevel(scale) {
+        let setScale = 15;
+        switch (scale) {
+            case 'Household':
+                setScale = 17;
+                break;
+            case 'Neighborhood':
+                setScale = 15;
+                break;
+            case 'City':
+                setScale = 12;
+                break;
+            case 'Region':
+                setScale = 10;
+                break;
+            default:
+                setScale = 15;
+        }
+        return setScale;
+    }
+
+    function flyToStore(currentFeature) {
+        map.flyTo({
+          center: currentFeature.geometry.coordinates,
+          zoom: setScaleForLevel(currentFeature.properties.what_spatial_scales_does_this_p)
+        });
+      }
+      
+      function createPopUp(currentFeature) {
+        var popUps = document.getElementsByClassName('mapboxgl-popup');
+        // Check if there is already a popup on the map and if so, remove it
+        if (popUps[0]) popUps[0].remove();
+      
+        var popup = new mapboxgl.Popup({ closeOnClick: false })
+          .setLngLat(currentFeature.geometry.coordinates)
+          .setHTML(`<h3>${currentFeature.properties.why_is_this_location_a_problem}</h3>` +
+            '<h4><strong>Difficulty: </strong>' + currentFeature.properties.how_challenging_is_this_problem + '</h4>' +
+            '<h4><strong>Challenge: </strong>' + currentFeature.properties.why_is_this_location_a_problem + '</h4>' +
+            '<h4><strong>Obstacle: </strong>' + currentFeature.properties.what_is_the_greatest_barrier_to + '</h4>' +
+            '<h4><strong>Supplies: </strong>' + currentFeature.properties.what_actions_can_be_taken_to_fi + '</h4>' +
+            '<h4>Get Started!</h4>'
+            )
+          .addTo(map);
+      }
+
+      // This will let you use the .remove() function later on
+        if (!('remove' in Element.prototype)) {
+            Element.prototype.remove = function() {
+            if (this.parentNode) {
+                this.parentNode.removeChild(this);
+            }
+            };
+        }
+
     // //Discharge GIF
     // var currentDischargeImage = 0;
     // var dischargeImages = [discharge020, discharge040, discharge060, discharge080, discharge100, discharge120];
@@ -75,7 +129,7 @@ map.on('load', () => {
 
     //Flooding GIF
     var frameCount = 10;
-    var currentImage = 0;
+    var currentImage = 9;
     var floodingImages = [flood_0_5, flood_1_0, flood_1_5, flood_2_0, flood_2_5, flood_3_0, flood_3_5, flood_4_0, flood_4_5, flood_5_0];
     function getPath() {
         return floodingImages[currentImage];
@@ -103,13 +157,13 @@ map.on('load', () => {
         }
     });
 
-    setInterval(function() {
-        currentImage = currentImage + 1;
-        if (currentImage == 10) {
-            currentImage = 0;
-        }
-        map.getSource("floodOverlay").updateImage({ url: getPath() });
-    }, 200);
+    // setInterval(function() {
+    //     currentImage = currentImage + 1;
+    //     if (currentImage == 10) {
+    //         currentImage = 0;
+    //     }
+    //     map.getSource("floodOverlay").updateImage({ url: getPath() });
+    // }, 200);
 
     if (! map.getSource('composite')) {map.addSource('composite', { type: 'vector', url: 'mapbox://mapbox.mapbox-streets-v7'});}
 
@@ -122,6 +176,55 @@ map.on('load', () => {
         break;
         }
     }
+
+    function buildLevelList(data) {
+        // Iterate through the list of stores
+        for (i = 0; i < data.features.length; i++) {
+          var currentFeature = data.features[i];
+          // Shorten data.feature.properties to `prop` so we're not
+          // writing this long form over and over again.
+          var prop = currentFeature.properties;
+          // Select the listing container in the HTML and append a div
+          // with the class 'item' for each store
+          var listings = document.getElementById('listings');
+          var listing = listings.appendChild(document.createElement('div'));
+          listing.className = 'item';
+          listing.id = 'listing-' + i;
+      
+          // Create a new link with the class 'title' for each store
+          // and fill it with the store address
+          var link = listing.appendChild(document.createElement('a'));
+          link.href = '#';
+          link.className = 'title';
+          link.dataPosition = i;
+          link.innerHTML = prop.why_is_this_location_a_problem;
+
+           // Add an event listener for the links in the sidebar listing
+        link.addEventListener('click', function(e) {
+            // Update the currentFeature to the store associated with the clicked link
+            var clickedListing = data.features[this.dataPosition];
+            // 1. Fly to the point associated with the clicked link
+            flyToStore(clickedListing);
+            // 2. Close all other popups and display popup for clicked store
+            createPopUp(clickedListing);
+            // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+            var activeItem = document.getElementsByClassName('active');
+            if (activeItem[0]) {
+            activeItem[0].classList.remove('active');
+            }
+            this.parentNode.classList.add('active');
+        });
+      
+          // Create a new div with the class 'details' for each store
+          // and fill it with the city and phone number
+          var details = listing.appendChild(document.createElement('div'));
+          details.innerHTML = prop.how_challenging_is_this_problem;
+          if (prop.phone) {
+            details.innerHTML += ' · ' + prop.phoneFormatted;
+          }
+        }
+      }
+      
 
       let levels = fetch('https://services1.arcgis.com/aT1T0pU1ZdpuDk1t/ArcGIS/rest/services/survey123_571499fe84ac4125abe48b793b9970a3_stakeholder/FeatureServer/0/query?f=json&returnGeometry=true&inSR=102100&outFields=*&outSR=4326&resultType=tile&where=1=1')
         .then(res=> res.json())
@@ -150,8 +253,42 @@ map.on('load', () => {
                     //     "icon-color": "#e00000"
                     //     }
                 });
+                buildLevelList(levels);
+                        // Add an event listener for when a user clicks on the map
+                map.on('click', function(e) {
+                    // Query all the rendered points in the view
+                    var features = map.queryRenderedFeatures(e.point, { layers: ['levels'] });
+                    if (features.length) {
+                    var clickedPoint = features[0];
+                    // 1. Fly to the point
+                    flyToStore(clickedPoint);
+                    // 2. Close all other popups and display popup for clicked store
+                    createPopUp(clickedPoint);
+                    // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+                    var activeItem = document.getElementsByClassName('active');
+                    if (activeItem[0]) {
+                        activeItem[0].classList.remove('active');
+                    }
+                    // Find the index of the store.features that corresponds to the clickedPoint that fired the event listener
+                    var selectedFeature = clickedPoint.properties.ObjectId;
+                
+                    for (var i = 0; i < levels.features.length; i++) {
+                        if (levels.features[i].properties.ObjectId === selectedFeature) {
+                        selectedFeatureIndex = i;
+                        }
+                    }
+                    // Select the correct list item using the found index and add the active class
+                    var listing = document.getElementById('listing-' + selectedFeatureIndex);
+                    listing.classList.add('active');
+                    }
+                });
             return levels;
         });
+
+       
+
+
+  
         
         
 
