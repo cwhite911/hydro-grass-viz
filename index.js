@@ -178,6 +178,7 @@ map.on('load', () => {
     }
 
     function buildLevelList(data) {
+        if (data.features.length !== levels.length) {
         // Iterate through the list of stores
         for (i = 0; i < data.features.length; i++) {
           var currentFeature = data.features[i];
@@ -223,10 +224,13 @@ map.on('load', () => {
             details.innerHTML += ' · ' + prop.phoneFormatted;
           }
         }
+    }
       }
       
 
-      let levels = fetch('https://services1.arcgis.com/aT1T0pU1ZdpuDk1t/ArcGIS/rest/services/survey123_571499fe84ac4125abe48b793b9970a3_stakeholder/FeatureServer/0/query?f=json&returnGeometry=true&inSR=102100&outFields=*&outSR=4326&where=1=1')
+      let levels = fetch(`https://services1.arcgis.com/aT1T0pU1ZdpuDk1t/ArcGIS/rest/services/survey123_571499fe84ac4125abe48b793b9970a3_stakeholder/FeatureServer/0/query?f=json&returnGeometry=true&inSR=102100&outFields=*&outSR=4326&where=1=1`, {
+        cache: "reload"
+      })
         .then(res=> res.json())
         .then(json=> arcgisToGeoJSON(json))
         .then(levels=> {
@@ -257,6 +261,7 @@ map.on('load', () => {
                         // Add an event listener for when a user clicks on the map
                 map.on('click', function(e) {
                     // Query all the rendered points in the view
+                    var selectedFeatureIndex;
                     var features = map.queryRenderedFeatures(e.point, { layers: ['levels'] });
                     if (features.length) {
                     var clickedPoint = features[0];
@@ -271,7 +276,7 @@ map.on('load', () => {
                     }
                     // Find the index of the store.features that corresponds to the clickedPoint that fired the event listener
                     var selectedFeature = clickedPoint.properties.ObjectId;
-                
+                    
                     for (var i = 0; i < levels.features.length; i++) {
                         if (levels.features[i].properties.ObjectId === selectedFeature) {
                         selectedFeatureIndex = i;
