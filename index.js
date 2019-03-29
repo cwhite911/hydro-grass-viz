@@ -196,7 +196,7 @@ map.on('load', () => {
           // and fill it with the store address
           var link = listing.appendChild(document.createElement('a'));
           link.href = '#';
-          link.className = 'title';
+          link.className = 'level-title';
           link.dataPosition = i;
           link.innerHTML = prop.why_is_this_location_a_problem;
 
