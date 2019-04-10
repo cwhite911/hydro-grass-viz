@@ -362,7 +362,7 @@ def main():
                                  compression=compression,
                                  routpng_flags=routpng_flags,
                                  wgs84_file=wgs84_file,
-                                 use_region=True)
+                                 use_region=False)
 
         data_file.write(pure_map_name + ',' + image_file_name + '\n')
 

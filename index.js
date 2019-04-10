@@ -8,6 +8,7 @@ import flood_3_5 from './images/inundation_3.5.png';
 import flood_4_0 from './images/inundation_4.0.png';
 import flood_4_5 from './images/inundation_4.5.png';
 import flood_5_0 from './images/inundation_5.0.png';
+import simwe from './images/simwe/data_file';
 import discharge020 from './images/disch_2m.020.png';
 import discharge040 from './images/disch_2m.040.png';
 import discharge060 from './images/disch_2m.060.png';
@@ -15,14 +16,16 @@ import discharge080 from './images/disch_2m.080.png';
 import discharge100 from './images/disch_2m.100.png';
 import discharge120 from './images/disch_2m.120.png';
 import flooding_gif from './images/flooding1.gif';
+import importedDischarge from './images/simwe/*.png'
 import bboxPolygon from '@turf/bbox-polygon';
 
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {StaticMap} from 'react-map-gl';
-import DeckGL, {ScreenGridLayer} from 'deck.gl';
-import {isWebGL2} from 'luma.gl';
+// import React, {Component} from 'react';
+// import {render} from 'react-dom';
+// import {StaticMap} from 'react-map-gl';
+// import DeckGL, {ScreenGridLayer} from 'deck.gl';
+// import {isWebGL2} from 'luma.gl';
 import { arcgisToGeoJSON } from '@esri/arcgis-to-geojson-utils';
+
 
 
 mapboxgl.accessToken = process.env.MapboxAccessToken;
@@ -34,6 +37,16 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/ctwhite/cjtnhxudz2j4l1fs74h5hygce',
     hash: true
 }).addControl(new mapboxgl.NavigationControl());
+
+//Convert Bounds to match mapbox gl source specs
+function grassBbox(bounds) {
+    return [
+        [bounds[1][1], bounds[1][0]],
+        [bounds[0][1], bounds[1][0]],
+        [bounds[0][1], bounds[0][0]],           
+        [bounds[1][1], bounds[0][0]]
+    ];
+}
 
 map.on('load', () => {
 
@@ -70,7 +83,7 @@ map.on('load', () => {
         // Check if there is already a popup on the map and if so, remove it
         if (popUps[0]) popUps[0].remove();
       
-        var popup = new mapboxgl.Popup({ closeOnClick: false })
+        var popup = new mapboxgl.Popup({ closeOnClick: true })
           .setLngLat(currentFeature.geometry.coordinates)
           .setHTML(`<h3>${currentFeature.properties.why_is_this_location_a_problem}</h3>` +
             '<h4><strong>Difficulty: </strong>' + currentFeature.properties.how_challenging_is_this_problem + '</h4>' +
@@ -97,36 +110,8 @@ map.on('load', () => {
     // function getDischargePath() {
     //     return dischargeImages[currentDischargeImage];
     // }
+    
  
-    // map.addSource('dischargeOverlay', {
-    //     type: 'image',
-    //     url: getDischargePath(),
-    //     coordinates: [
-    //         [-78.7746204947222, 35.8096093825],
-    //         [-78.6083031766667, 35.8096093825],
-    //         [-78.6083031766667, 35.6875072969444],
-    //         [-78.7746204947222, 35.6875072969444]    
-    //     ]
-    //  });
-
-    // map.addLayer({
-    //     "id": "dischargeOverlay",
-    //     "source": "dischargeOverlay",
-    //     "type": "raster",
-    //     "paint": {
-    //         "raster-opacity": 0.50,
-    //         "raster-fade-duration": 0
-    //     }
-    // });
-
-    // setInterval(function() {
-    //     currentDischargeImage = currentDischargeImage + 1;
-    //     if (currentDischargeImage == 5) {
-    //         currentDischargeImage = 0;
-    //     }
-    //     map.getSource("dischargeOverlay").updateImage({ url: getDischargePath() });
-    // }, 200);
-
     //Flooding GIF
     var frameCount = 10;
     var currentImage = 9;
@@ -176,6 +161,49 @@ map.on('load', () => {
         break;
         }
     }
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 14,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            'fill-extrusion-height': [
+                "interpolate", ["linear"], ["zoom"],
+                14, 0,
+                14.05, ["get", "height"]
+            ],
+            'fill-extrusion-base': [
+                "interpolate", ["linear"], ["zoom"],
+                14, 0,
+                14.05, ["get", "min_height"]
+            ],
+            'fill-extrusion-opacity': 1
+            }
+        }, labelLayerId);
+
+        simwe.forEach(element => {
+            console.log(importedDischarge[element.title])
+            map.addSource(element.title, {
+                type: 'image',
+                url: importedDischarge[element.title],
+                coordinates: grassBbox(element.bounds)
+            });
+    
+            map.addLayer({
+                "id": element.title,
+                "source": element.title,
+                "type": "raster",
+                "paint": {
+                    "raster-opacity": 0.60,
+                    "raster-fade-duration": 2
+                }
+            });
+        });
 
     function buildLevelList(data) {
         if (data.features.length !== levels.length) {
@@ -245,8 +273,19 @@ map.on('load', () => {
                     "type": "circle",
                     "paint": {
                     "circle-radius": 10,
-                    "circle-color": "#FFE100"
-                    },
+                    "circle-color": "#FFE100",
+                    "circle-opacity": 0.8
+                    // 'fill-extrusion-color': '#FFE100',
+                    // use an 'interpolate' expression to add a smooth transition effect to the
+                    // buildings as the user zooms in
+                    // 'fill-extrusion-height': 100,
+                    // 'fill-extrusion-base': [
+                    //     "interpolate", ["linear"], ["zoom"],
+                    //     14, 0,
+                    //     14.05, 0
+                    // ],
+                    // 'fill-extrusion-opacity': 0.8
+                    }
                     // "type": "symbol",
                     // "layout": {
                     //     "icon-image": "star-15",
@@ -257,6 +296,62 @@ map.on('load', () => {
                     //     "icon-color": "#e00000"
                     //     }
                 });
+
+                map.addLayer({
+                    "id": "earthquakes-heat",
+                    "type": "heatmap",
+                    "source": "levels",
+                    "maxzoom": 9,
+                    "paint": {
+                    // Increase the heatmap weight based on frequency and property magnitude
+                    // "heatmap-weight": [
+                    // "interpolate",
+                    // ["linear"],
+                    // ["get", "mag"],
+                    // 0, 0,
+                    // 6, 1
+                    // ],
+                    // Increase the heatmap color weight weight by zoom level
+                    // heatmap-intensity is a multiplier on top of heatmap-weight
+                    "heatmap-intensity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    0, 1,
+                    9, 3
+                    ],
+                    // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+                    // Begin color ramp at 0-stop with a 0-transparancy color
+                    // to create a blur-like effect.
+                    "heatmap-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["heatmap-density"],
+                    0, "rgba(33,102,172,0)",
+                    0.2, "rgb(103,169,207)",
+                    0.4, "rgb(209,229,240)",
+                    0.6, "rgb(253,219,199)",
+                    0.8, "rgb(239,138,98)",
+                    1, "rgb(178,24,43)"
+                    ],
+                    // Adjust the heatmap radius by zoom level
+                    "heatmap-radius": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    0, 2,
+                    9, 20
+                    ],
+                    // Transition from heatmap to circle layer by zoom level
+                    "heatmap-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    7, 1,
+                    9, 0
+                    ],
+                    }
+                    });
                 buildLevelList(levels);
                         // Add an event listener for when a user clicks on the map
                 map.on('click', function(e) {
@@ -302,30 +397,7 @@ map.on('load', () => {
  
    
 
-     map.addLayer({
-        'id': '3d-buildings',
-        'source': 'composite',
-        'source-layer': 'building',
-        'filter': ['==', 'extrude', 'true'],
-        'type': 'fill-extrusion',
-        'minzoom': 14,
-        'paint': {
-            'fill-extrusion-color': '#aaa',
-            // use an 'interpolate' expression to add a smooth transition effect to the
-            // buildings as the user zooms in
-            'fill-extrusion-height': [
-                "interpolate", ["linear"], ["zoom"],
-                14, 0,
-                14.05, ["get", "height"]
-            ],
-            'fill-extrusion-base': [
-                "interpolate", ["linear"], ["zoom"],
-                14, 0,
-                14.05, ["get", "min_height"]
-            ],
-            'fill-extrusion-opacity': 0.8
-            }
-        }, labelLayerId);
+    
   
 
 });
