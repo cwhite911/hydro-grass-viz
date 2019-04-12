@@ -10,6 +10,8 @@ import flood_4_5 from './images/inundation_4.5.png';
 import flood_5_0 from './images/inundation_5.0.png';
 import simwe from './images/simwe/data_file';
 import importedDischarge from './images/simwe/*.png';
+import dischAnimation from './images/grassoutput/data_file';
+import dischAnimationImages from './images/grassoutput/*.png';
 
 // import React, {Component} from 'react';
 // import {render} from 'react-dom';
@@ -102,7 +104,17 @@ map.on('load', () => {
     // function getDischargePath() {
     //     return dischargeImages[currentDischargeImage];
     // }
-    
+    if (! map.getSource('composite')) {map.addSource('composite', { type: 'vector', url: 'mapbox://mapbox.mapbox-streets-v7'});}
+
+    const layers = map.getStyle().layers;
+ 
+    let labelLayerId;
+    for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+        labelLayerId = layers[i].id;
+        break;
+        }
+    }
  
     //Flooding GIF
     var frameCount = 10;
@@ -132,16 +144,40 @@ map.on('load', () => {
             "raster-opacity": 0.85,
             "raster-fade-duration": 0
         }
-    });
+    },labelLayerId);
 
-    // setInterval(function() {
-    //     currentImage = currentImage + 1;
-    //     if (currentImage == 10) {
-    //         currentImage = 0;
+
+    // //Discharge GIF
+    //Turned off for demo
+    // var currentDischargeImage = 0;
+    // function getDischargePath() {
+    //     return dischAnimationImages[dischAnimation[currentDischargeImage].title];
+    // }
+
+    // map.addSource("dischAnimation", {
+    //     type: 'image',
+    //     url: getDischargePath(),
+    //     coordinates: grassBbox(dischAnimation[0].bounds)
+    // });
+
+    // map.addLayer({
+    //     "id": "dischAnimation",
+    //     "source": "dischAnimation",
+    //     "type": "raster",
+    //     "paint": {
+    //         "raster-opacity": 0.60,
+    //         "raster-fade-duration": 2
     //     }
-    //     map.getSource("floodOverlay").updateImage({ url: getPath() });
+    // });
+    // console.log("dischAnimation", dischAnimation.length)
+    // setInterval(function() {
+    //     currentDischargeImage = currentDischargeImage + 1;
+    //     if (currentDischargeImage >= dischAnimation.length) {
+    //         currentDischargeImage = 0;
+    //     }
+    //     map.getSource("dischAnimation").updateImage({ url: getDischargePath() });
     // }, 200);
-
+   
     
         simwe.forEach(element => {
             console.log(importedDischarge[element.title])
@@ -159,7 +195,7 @@ map.on('load', () => {
                     "raster-opacity": 0.60,
                     "raster-fade-duration": 2
                 }
-            });
+            },labelLayerId);
         });
 
     function buildLevelList(data) {
@@ -346,17 +382,7 @@ map.on('load', () => {
 
 
   
-        if (! map.getSource('composite')) {map.addSource('composite', { type: 'vector', url: 'mapbox://mapbox.mapbox-streets-v7'});}
-
-    const layers = map.getStyle().layers;
- 
-    let labelLayerId;
-    for (var i = 0; i < layers.length; i++) {
-        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-        labelLayerId = layers[i].id;
-        break;
-        }
-    }
+   
     map.addLayer({
         'id': '3d-buildings',
         'source': 'composite',
@@ -378,12 +404,21 @@ map.on('load', () => {
                 14, 0,
                 14.05, ["get", "min_height"]
             ],
-            'fill-extrusion-opacity': 1
+            'fill-extrusion-opacity': 0.7
             }
         }, labelLayerId);
 
         
-
+        // map.addLayer({
+        //     'id': 'water-line-layer',
+        //     'source': 'composite',
+        //     'source-layer': 'water',
+        //     'type': 'line',
+        //     'minzoom': 15,
+        //     'paint': {
+        //         'fill-color': '#2ea3f2'
+        //     }
+        // },labelLayerId)
 
        // Add the data to your map as a layer
  

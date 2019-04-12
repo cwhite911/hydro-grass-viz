@@ -188,11 +188,43 @@ var layerInfos = [{
   file: "D03_37_20170201_20160228_disch.120.png",
   bounds: [[35.74152717, -78.64610278], [35.75531153, -78.66301210]],
   opacity: 1.0
+}, {
+  title: "D03_37_20079102_20160228_disch",
+  file: "D03_37_20079102_20160228_disch.png",
+  bounds: [[35.71410166, -78.66306929], [35.72788380, -78.67997001]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20170203_20160228_disch",
+  file: "D03_37_20170203_20160228_disch.png",
+  bounds: [[35.72779056, -78.64616284], [35.74157497, -78.66306929]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20170204_20160228_disch",
+  file: "D03_37_20170204_20160228_disch.png",
+  bounds: [[35.72774044, -78.62931361], [35.74152717, -78.64622289]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20170302_20160228_disch",
+  file: "D03_37_20170302_20160228_disch.png",
+  bounds: [[35.76895007, -78.62912476], [35.78273665, -78.64604269]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20171102_20160228_disch",
+  file: "D03_37_20171102_20160228_disch.png",
+  bounds: [[35.71389655, -78.59568383], [35.72768798, -78.61259590]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20172301_20160228_disch",
+  file: "D03_37_20172301_20160228_disch.png",
+  bounds: [[35.76878565, -78.57855144], [35.78257919, -78.59547788]],
+  opacity: 1.0
 }];
 var _default = layerInfos;
 exports.default = _default;
 },{}],"images/simwe/D03_37_20079101_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20079101_20160228_disch.120.1ab84855.png";
+},{}],"images/simwe/D03_37_20079102_20160228_disch.png":[function(require,module,exports) {
+module.exports = "/D03_37_20079102_20160228_disch.9821642e.png";
 },{}],"images/simwe/D03_37_20079201_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20079201_20160228_disch.120.a473d1c7.png";
 },{}],"images/simwe/D03_37_20079301_20160228_disch.120.png":[function(require,module,exports) {
@@ -201,33 +233,112 @@ module.exports = "/D03_37_20079301_20160228_disch.120.cd551e12.png";
 module.exports = "/D03_37_20170101_20160228_disch.120.afadc82a.png";
 },{}],"images/simwe/D03_37_20170201_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20170201_20160228_disch.120.07d44377.png";
+},{}],"images/simwe/D03_37_20170203_20160228_disch.png":[function(require,module,exports) {
+module.exports = "/D03_37_20170203_20160228_disch.9d1903ca.png";
+},{}],"images/simwe/D03_37_20170204_20160228_disch.png":[function(require,module,exports) {
+module.exports = "/D03_37_20170204_20160228_disch.5193ee1e.png";
 },{}],"images/simwe/D03_37_20170301_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20170301_20160228_disch.120.caa707b7.png";
+},{}],"images/simwe/D03_37_20170302_20160228_disch.png":[function(require,module,exports) {
+module.exports = "/D03_37_20170302_20160228_disch.d12f6331.png";
 },{}],"images/simwe/D03_37_20171101_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20171101_20160228_disch.120.0695c806.png";
+},{}],"images/simwe/D03_37_20171102_20160228_disch.png":[function(require,module,exports) {
+module.exports = "/D03_37_20171102_20160228_disch.9f5fbeca.png";
 },{}],"images/simwe/D03_37_20171201_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20171201_20160228_disch.120.a0eb09a7.png";
 },{}],"images/simwe/D03_37_20171301_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20171301_20160228_disch.120.5d4fff44.png";
 },{}],"images/simwe/D03_37_20172203_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20172203_20160228_disch.120.8ed3e2ba.png";
+},{}],"images/simwe/D03_37_20172301_20160228_disch.png":[function(require,module,exports) {
+module.exports = "/D03_37_20172301_20160228_disch.9a6bc63d.png";
 },{}],"images/simwe/D03_37_20172403_20160228_disch.120.png":[function(require,module,exports) {
 module.exports = "/D03_37_20172403_20160228_disch.120.eaab995d.png";
 },{}],"images/simwe/*.png":[function(require,module,exports) {
 module.exports = {
   "D03_37_20079101_20160228_disch.120": require("./D03_37_20079101_20160228_disch.120.png"),
+  "D03_37_20079102_20160228_disch": require("./D03_37_20079102_20160228_disch.png"),
   "D03_37_20079201_20160228_disch.120": require("./D03_37_20079201_20160228_disch.120.png"),
   "D03_37_20079301_20160228_disch.120": require("./D03_37_20079301_20160228_disch.120.png"),
   "D03_37_20170101_20160228_disch.120": require("./D03_37_20170101_20160228_disch.120.png"),
   "D03_37_20170201_20160228_disch.120": require("./D03_37_20170201_20160228_disch.120.png"),
+  "D03_37_20170203_20160228_disch": require("./D03_37_20170203_20160228_disch.png"),
+  "D03_37_20170204_20160228_disch": require("./D03_37_20170204_20160228_disch.png"),
   "D03_37_20170301_20160228_disch.120": require("./D03_37_20170301_20160228_disch.120.png"),
+  "D03_37_20170302_20160228_disch": require("./D03_37_20170302_20160228_disch.png"),
   "D03_37_20171101_20160228_disch.120": require("./D03_37_20171101_20160228_disch.120.png"),
+  "D03_37_20171102_20160228_disch": require("./D03_37_20171102_20160228_disch.png"),
   "D03_37_20171201_20160228_disch.120": require("./D03_37_20171201_20160228_disch.120.png"),
   "D03_37_20171301_20160228_disch.120": require("./D03_37_20171301_20160228_disch.120.png"),
   "D03_37_20172203_20160228_disch.120": require("./D03_37_20172203_20160228_disch.120.png"),
+  "D03_37_20172301_20160228_disch": require("./D03_37_20172301_20160228_disch.png"),
   "D03_37_20172403_20160228_disch.120": require("./D03_37_20172403_20160228_disch.120.png")
 };
-},{"./D03_37_20079101_20160228_disch.120.png":"images/simwe/D03_37_20079101_20160228_disch.120.png","./D03_37_20079201_20160228_disch.120.png":"images/simwe/D03_37_20079201_20160228_disch.120.png","./D03_37_20079301_20160228_disch.120.png":"images/simwe/D03_37_20079301_20160228_disch.120.png","./D03_37_20170101_20160228_disch.120.png":"images/simwe/D03_37_20170101_20160228_disch.120.png","./D03_37_20170201_20160228_disch.120.png":"images/simwe/D03_37_20170201_20160228_disch.120.png","./D03_37_20170301_20160228_disch.120.png":"images/simwe/D03_37_20170301_20160228_disch.120.png","./D03_37_20171101_20160228_disch.120.png":"images/simwe/D03_37_20171101_20160228_disch.120.png","./D03_37_20171201_20160228_disch.120.png":"images/simwe/D03_37_20171201_20160228_disch.120.png","./D03_37_20171301_20160228_disch.120.png":"images/simwe/D03_37_20171301_20160228_disch.120.png","./D03_37_20172203_20160228_disch.120.png":"images/simwe/D03_37_20172203_20160228_disch.120.png","./D03_37_20172403_20160228_disch.120.png":"images/simwe/D03_37_20172403_20160228_disch.120.png"}],"node_modules/@esri/arcgis-to-geojson-utils/index.js":[function(require,module,exports) {
+},{"./D03_37_20079101_20160228_disch.120.png":"images/simwe/D03_37_20079101_20160228_disch.120.png","./D03_37_20079102_20160228_disch.png":"images/simwe/D03_37_20079102_20160228_disch.png","./D03_37_20079201_20160228_disch.120.png":"images/simwe/D03_37_20079201_20160228_disch.120.png","./D03_37_20079301_20160228_disch.120.png":"images/simwe/D03_37_20079301_20160228_disch.120.png","./D03_37_20170101_20160228_disch.120.png":"images/simwe/D03_37_20170101_20160228_disch.120.png","./D03_37_20170201_20160228_disch.120.png":"images/simwe/D03_37_20170201_20160228_disch.120.png","./D03_37_20170203_20160228_disch.png":"images/simwe/D03_37_20170203_20160228_disch.png","./D03_37_20170204_20160228_disch.png":"images/simwe/D03_37_20170204_20160228_disch.png","./D03_37_20170301_20160228_disch.120.png":"images/simwe/D03_37_20170301_20160228_disch.120.png","./D03_37_20170302_20160228_disch.png":"images/simwe/D03_37_20170302_20160228_disch.png","./D03_37_20171101_20160228_disch.120.png":"images/simwe/D03_37_20171101_20160228_disch.120.png","./D03_37_20171102_20160228_disch.png":"images/simwe/D03_37_20171102_20160228_disch.png","./D03_37_20171201_20160228_disch.120.png":"images/simwe/D03_37_20171201_20160228_disch.120.png","./D03_37_20171301_20160228_disch.120.png":"images/simwe/D03_37_20171301_20160228_disch.120.png","./D03_37_20172203_20160228_disch.120.png":"images/simwe/D03_37_20172203_20160228_disch.120.png","./D03_37_20172301_20160228_disch.png":"images/simwe/D03_37_20172301_20160228_disch.png","./D03_37_20172403_20160228_disch.120.png":"images/simwe/D03_37_20172403_20160228_disch.120.png"}],"images/grassoutput/data_file.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/* This file was generated by r.out.leaflet GRASS GIS module. */
+var dischAnimation = [{
+  title: "D03_37_20079201_20160228_disch.020",
+  file: "D03_37_20079201_20160228_disch.020.png",
+  bounds: [[35.74162043, -78.67980703], [35.75540014, -78.69671067]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20079201_20160228_disch.040",
+  file: "D03_37_20079201_20160228_disch.040.png",
+  bounds: [[35.74162043, -78.67980703], [35.75540014, -78.69671067]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20079201_20160228_disch.060",
+  file: "D03_37_20079201_20160228_disch.060.png",
+  bounds: [[35.74162043, -78.67980703], [35.75540014, -78.69671067]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20079201_20160228_disch.080",
+  file: "D03_37_20079201_20160228_disch.080.png",
+  bounds: [[35.74162043, -78.67980703], [35.75540014, -78.69671067]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20079201_20160228_disch.100",
+  file: "D03_37_20079201_20160228_disch.100.png",
+  bounds: [[35.74162043, -78.67980703], [35.75540014, -78.69671067]],
+  opacity: 1.0
+}, {
+  title: "D03_37_20079201_20160228_disch.120",
+  file: "D03_37_20079201_20160228_disch.120.png",
+  bounds: [[35.74162043, -78.67980703], [35.75540014, -78.69671067]],
+  opacity: 1.0
+}];
+var _default = dischAnimation;
+exports.default = _default;
+},{}],"images/grassoutput/D03_37_20079201_20160228_disch.020.png":[function(require,module,exports) {
+module.exports = "/D03_37_20079201_20160228_disch.020.3e2b6fd2.png";
+},{}],"images/grassoutput/D03_37_20079201_20160228_disch.040.png":[function(require,module,exports) {
+module.exports = "/D03_37_20079201_20160228_disch.040.2f6e4792.png";
+},{}],"images/grassoutput/D03_37_20079201_20160228_disch.060.png":[function(require,module,exports) {
+module.exports = "/D03_37_20079201_20160228_disch.060.8bf17983.png";
+},{}],"images/grassoutput/D03_37_20079201_20160228_disch.080.png":[function(require,module,exports) {
+module.exports = "/D03_37_20079201_20160228_disch.080.007df4a2.png";
+},{}],"images/grassoutput/D03_37_20079201_20160228_disch.100.png":[function(require,module,exports) {
+module.exports = "/D03_37_20079201_20160228_disch.100.f38574a5.png";
+},{}],"images/grassoutput/D03_37_20079201_20160228_disch.120.png":[function(require,module,exports) {
+module.exports = "/D03_37_20079201_20160228_disch.120.0483fb90.png";
+},{}],"images/grassoutput/*.png":[function(require,module,exports) {
+module.exports = {
+  "D03_37_20079201_20160228_disch.020": require("./D03_37_20079201_20160228_disch.020.png"),
+  "D03_37_20079201_20160228_disch.040": require("./D03_37_20079201_20160228_disch.040.png"),
+  "D03_37_20079201_20160228_disch.060": require("./D03_37_20079201_20160228_disch.060.png"),
+  "D03_37_20079201_20160228_disch.080": require("./D03_37_20079201_20160228_disch.080.png"),
+  "D03_37_20079201_20160228_disch.100": require("./D03_37_20079201_20160228_disch.100.png"),
+  "D03_37_20079201_20160228_disch.120": require("./D03_37_20079201_20160228_disch.120.png")
+};
+},{"./D03_37_20079201_20160228_disch.020.png":"images/grassoutput/D03_37_20079201_20160228_disch.020.png","./D03_37_20079201_20160228_disch.040.png":"images/grassoutput/D03_37_20079201_20160228_disch.040.png","./D03_37_20079201_20160228_disch.060.png":"images/grassoutput/D03_37_20079201_20160228_disch.060.png","./D03_37_20079201_20160228_disch.080.png":"images/grassoutput/D03_37_20079201_20160228_disch.080.png","./D03_37_20079201_20160228_disch.100.png":"images/grassoutput/D03_37_20079201_20160228_disch.100.png","./D03_37_20079201_20160228_disch.120.png":"images/grassoutput/D03_37_20079201_20160228_disch.120.png"}],"node_modules/@esri/arcgis-to-geojson-utils/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -692,6 +803,10 @@ var _data_file = _interopRequireDefault(require("./images/simwe/data_file"));
 
 var _ = _interopRequireDefault(require("./images/simwe/*.png"));
 
+var _data_file2 = _interopRequireDefault(require("./images/grassoutput/data_file"));
+
+var _2 = _interopRequireDefault(require("./images/grassoutput/*.png"));
+
 var _arcgisToGeojsonUtils = require("@esri/arcgis-to-geojson-utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -772,7 +887,24 @@ map.on('load', function () {
   // function getDischargePath() {
   //     return dischargeImages[currentDischargeImage];
   // }
-  //Flooding GIF
+
+
+  if (!map.getSource('composite')) {
+    map.addSource('composite', {
+      type: 'vector',
+      url: 'mapbox://mapbox.mapbox-streets-v7'
+    });
+  }
+
+  var layers = map.getStyle().layers;
+  var labelLayerId;
+
+  for (var i = 0; i < layers.length; i++) {
+    if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+      labelLayerId = layers[i].id;
+      break;
+    }
+  } //Flooding GIF
 
 
   var frameCount = 10;
@@ -796,12 +928,33 @@ map.on('load', function () {
       "raster-opacity": 0.85,
       "raster-fade-duration": 0
     }
-  }); // setInterval(function() {
-  //     currentImage = currentImage + 1;
-  //     if (currentImage == 10) {
-  //         currentImage = 0;
+  }, labelLayerId); // //Discharge GIF
+  //Turned off for demo
+  // var currentDischargeImage = 0;
+  // function getDischargePath() {
+  //     return dischAnimationImages[dischAnimation[currentDischargeImage].title];
+  // }
+  // map.addSource("dischAnimation", {
+  //     type: 'image',
+  //     url: getDischargePath(),
+  //     coordinates: grassBbox(dischAnimation[0].bounds)
+  // });
+  // map.addLayer({
+  //     "id": "dischAnimation",
+  //     "source": "dischAnimation",
+  //     "type": "raster",
+  //     "paint": {
+  //         "raster-opacity": 0.60,
+  //         "raster-fade-duration": 2
   //     }
-  //     map.getSource("floodOverlay").updateImage({ url: getPath() });
+  // });
+  // console.log("dischAnimation", dischAnimation.length)
+  // setInterval(function() {
+  //     currentDischargeImage = currentDischargeImage + 1;
+  //     if (currentDischargeImage >= dischAnimation.length) {
+  //         currentDischargeImage = 0;
+  //     }
+  //     map.getSource("dischAnimation").updateImage({ url: getDischargePath() });
   // }, 200);
 
   _data_file.default.forEach(function (element) {
@@ -819,7 +972,7 @@ map.on('load', function () {
         "raster-opacity": 0.60,
         "raster-fade-duration": 2
       }
-    });
+    }, labelLayerId);
   });
 
   function buildLevelList(data) {
@@ -978,24 +1131,6 @@ map.on('load', function () {
     });
     return levels;
   });
-
-  if (!map.getSource('composite')) {
-    map.addSource('composite', {
-      type: 'vector',
-      url: 'mapbox://mapbox.mapbox-streets-v7'
-    });
-  }
-
-  var layers = map.getStyle().layers;
-  var labelLayerId;
-
-  for (var i = 0; i < layers.length; i++) {
-    if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-      labelLayerId = layers[i].id;
-      break;
-    }
-  }
-
   map.addLayer({
     'id': '3d-buildings',
     'source': 'composite',
@@ -1009,11 +1144,21 @@ map.on('load', function () {
       // buildings as the user zooms in
       'fill-extrusion-height': ["interpolate", ["linear"], ["zoom"], 14, 0, 14.05, ["get", "height"]],
       'fill-extrusion-base': ["interpolate", ["linear"], ["zoom"], 14, 0, 14.05, ["get", "min_height"]],
-      'fill-extrusion-opacity': 1
+      'fill-extrusion-opacity': 0.7
     }
-  }, labelLayerId); // Add the data to your map as a layer
+  }, labelLayerId); // map.addLayer({
+  //     'id': 'water-line-layer',
+  //     'source': 'composite',
+  //     'source-layer': 'water',
+  //     'type': 'line',
+  //     'minzoom': 15,
+  //     'paint': {
+  //         'fill-color': '#2ea3f2'
+  //     }
+  // },labelLayerId)
+  // Add the data to your map as a layer
 });
-},{"./images/inundation_0.5.png":"images/inundation_0.5.png","./images/inundation_1.0.png":"images/inundation_1.0.png","./images/inundation_1.5.png":"images/inundation_1.5.png","./images/inundation_2.0.png":"images/inundation_2.0.png","./images/inundation_2.5.png":"images/inundation_2.5.png","./images/inundation_3.0.png":"images/inundation_3.0.png","./images/inundation_3.5.png":"images/inundation_3.5.png","./images/inundation_4.0.png":"images/inundation_4.0.png","./images/inundation_4.5.png":"images/inundation_4.5.png","./images/inundation_5.0.png":"images/inundation_5.0.png","./images/simwe/data_file":"images/simwe/data_file.js","./images/simwe/*.png":"images/simwe/*.png","@esri/arcgis-to-geojson-utils":"node_modules/@esri/arcgis-to-geojson-utils/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./images/inundation_0.5.png":"images/inundation_0.5.png","./images/inundation_1.0.png":"images/inundation_1.0.png","./images/inundation_1.5.png":"images/inundation_1.5.png","./images/inundation_2.0.png":"images/inundation_2.0.png","./images/inundation_2.5.png":"images/inundation_2.5.png","./images/inundation_3.0.png":"images/inundation_3.0.png","./images/inundation_3.5.png":"images/inundation_3.5.png","./images/inundation_4.0.png":"images/inundation_4.0.png","./images/inundation_4.5.png":"images/inundation_4.5.png","./images/inundation_5.0.png":"images/inundation_5.0.png","./images/simwe/data_file":"images/simwe/data_file.js","./images/simwe/*.png":"images/simwe/*.png","./images/grassoutput/data_file":"images/grassoutput/data_file.js","./images/grassoutput/*.png":"images/grassoutput/*.png","@esri/arcgis-to-geojson-utils":"node_modules/@esri/arcgis-to-geojson-utils/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1040,7 +1185,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61656" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50425" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
