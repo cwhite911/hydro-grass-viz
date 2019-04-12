@@ -871,7 +871,7 @@ map.on('load', function () {
     if (popUps[0]) popUps[0].remove();
     var popup = new mapboxgl.Popup({
       closeOnClick: true
-    }).setLngLat(currentFeature.geometry.coordinates).setHTML("<h3>".concat(currentFeature.properties.why_is_this_location_a_problem, "</h3>") + '<h4><strong>Difficulty: </strong>' + currentFeature.properties.how_challenging_is_this_problem + '</h4>' + '<h4><strong>Challenge: </strong>' + currentFeature.properties.why_is_this_location_a_problem + '</h4>' + '<h4><strong>Obstacle: </strong>' + currentFeature.properties.what_is_the_greatest_barrier_to + '</h4>' + '<h4><strong>Supplies: </strong>' + currentFeature.properties.what_actions_can_be_taken_to_fi + '</h4>' + '<h4>Get Started!</h4>').addTo(map);
+    }).setLngLat(currentFeature.geometry.coordinates).setHTML("<h3><strong>ID: ".concat(currentFeature.properties.ObjectId, "</strong> </h3>") + '<h4><strong>Details: </strong>' + currentFeature.properties.why_is_this_location_a_problem + '</h4>' + '<h4><strong>Difficulty: </strong>' + currentFeature.properties.how_challenging_is_this_problem + '</h4>' + '<h4><strong>Challenge: </strong>' + currentFeature.properties.why_is_this_location_a_problem + '</h4>' + '<h4><strong>Obstacle: </strong>' + currentFeature.properties.what_is_the_greatest_barrier_to + '</h4>' + '<h4><strong>Supplies: </strong>' + currentFeature.properties.what_actions_can_be_taken_to_fi + '</h4>' + '<h4>Get Started!</h4>').addTo(map);
   } // This will let you use the .remove() function later on
 
 
@@ -1185,7 +1185,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50425" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57504" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
