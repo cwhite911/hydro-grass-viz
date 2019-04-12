@@ -79,7 +79,8 @@ map.on('load', () => {
       
         var popup = new mapboxgl.Popup({ closeOnClick: true })
           .setLngLat(currentFeature.geometry.coordinates)
-          .setHTML(`<h3>${currentFeature.properties.why_is_this_location_a_problem}</h3>` +
+          .setHTML(`<h3><strong>ID: ${currentFeature.properties.ObjectId}</strong> </h3>` +
+            '<h4><strong>Details: </strong>' + currentFeature.properties.why_is_this_location_a_problem + '</h4>' +
             '<h4><strong>Difficulty: </strong>' + currentFeature.properties.how_challenging_is_this_problem + '</h4>' +
             '<h4><strong>Challenge: </strong>' + currentFeature.properties.why_is_this_location_a_problem + '</h4>' +
             '<h4><strong>Obstacle: </strong>' + currentFeature.properties.what_is_the_greatest_barrier_to + '</h4>' +
