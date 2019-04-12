@@ -9,15 +9,7 @@ import flood_4_0 from './images/inundation_4.0.png';
 import flood_4_5 from './images/inundation_4.5.png';
 import flood_5_0 from './images/inundation_5.0.png';
 import simwe from './images/simwe/data_file';
-import discharge020 from './images/disch_2m.020.png';
-import discharge040 from './images/disch_2m.040.png';
-import discharge060 from './images/disch_2m.060.png';
-import discharge080 from './images/disch_2m.080.png';
-import discharge100 from './images/disch_2m.100.png';
-import discharge120 from './images/disch_2m.120.png';
-import flooding_gif from './images/flooding1.gif';
-import importedDischarge from './images/simwe/*.png'
-import bboxPolygon from '@turf/bbox-polygon';
+import importedDischarge from './images/simwe/*.png';
 
 // import React, {Component} from 'react';
 // import {render} from 'react-dom';
@@ -150,42 +142,7 @@ map.on('load', () => {
     //     map.getSource("floodOverlay").updateImage({ url: getPath() });
     // }, 200);
 
-    if (! map.getSource('composite')) {map.addSource('composite', { type: 'vector', url: 'mapbox://mapbox.mapbox-streets-v7'});}
-
-    const layers = map.getStyle().layers;
- 
-    let labelLayerId;
-    for (var i = 0; i < layers.length; i++) {
-        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-        labelLayerId = layers[i].id;
-        break;
-        }
-    }
-    map.addLayer({
-        'id': '3d-buildings',
-        'source': 'composite',
-        'source-layer': 'building',
-        'filter': ['==', 'extrude', 'true'],
-        'type': 'fill-extrusion',
-        'minzoom': 14,
-        'paint': {
-            'fill-extrusion-color': '#aaa',
-            // use an 'interpolate' expression to add a smooth transition effect to the
-            // buildings as the user zooms in
-            'fill-extrusion-height': [
-                "interpolate", ["linear"], ["zoom"],
-                14, 0,
-                14.05, ["get", "height"]
-            ],
-            'fill-extrusion-base': [
-                "interpolate", ["linear"], ["zoom"],
-                14, 0,
-                14.05, ["get", "min_height"]
-            ],
-            'fill-extrusion-opacity': 1
-            }
-        }, labelLayerId);
-
+    
         simwe.forEach(element => {
             console.log(importedDischarge[element.title])
             map.addSource(element.title, {
@@ -389,7 +346,42 @@ map.on('load', () => {
 
 
   
-        
+        if (! map.getSource('composite')) {map.addSource('composite', { type: 'vector', url: 'mapbox://mapbox.mapbox-streets-v7'});}
+
+    const layers = map.getStyle().layers;
+ 
+    let labelLayerId;
+    for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+        labelLayerId = layers[i].id;
+        break;
+        }
+    }
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 14,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            'fill-extrusion-height': [
+                "interpolate", ["linear"], ["zoom"],
+                14, 0,
+                14.05, ["get", "height"]
+            ],
+            'fill-extrusion-base': [
+                "interpolate", ["linear"], ["zoom"],
+                14, 0,
+                14.05, ["get", "min_height"]
+            ],
+            'fill-extrusion-opacity': 1
+            }
+        }, labelLayerId);
+
         
 
 

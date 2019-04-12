@@ -14,6 +14,8 @@
 import os
 import grass.script as gscript
 
+complete = [ 'D03_37_20172303_20160228','D03_37_20171201_20160228', 'D03_37_20079201_20160228','D03_37_20170101_20160228','D03_37_20171301_20160228','D03_37_20079301_20160228','D03_37_20172203_20160228','D03_37_20079101_20160228','D03_37_20171101_20160228','D03_37_20170301_20160228','D03_37_20172403_20160228','D03_37_20170201_20160228']
+
 ROOT="~/Downloads/WakeCoNC_elevation_20944"
 def main():
     
@@ -22,28 +24,29 @@ def main():
         for file in files:
             if not file.endswith(".xml") and not file.endswith(".txt"):
                 outfile = file.split("\\")[-1].replace(".img", "")
-                print("Reading external file %s" % outfile)
-                inputFile = "/Users/smortop/Downloads/WakeCoNC_elevation_20944/" + file
-                gscript.read_command('r.import', input=inputFile, output=outfile)
-                # gscript.write_command('r.external.out', directory="/Users/smortop/Documents/GitHub/hydro-grass-viz/images/grassoutput", format="GTiff")
-                print("Setting Computational Region")
-                gscript.run_command('g.region', raster=outfile)
-                dxOut="%s_dx" % outfile
-                dyOut="%s_dy" % outfile
-                print("Calculating dx dy")
-                gscript.run_command('r.slope.aspect', elevation=outfile, dx=dxOut, dy=dyOut)
-                depth="%s_wdp" % outfile
-                discharge="%s_disch" % outfile
-                print("Running r.sim.water")
-                gscript.run_command('r.sim.water', dx=dxOut, dy=dyOut, elevation=outfile, rain_value=50, infil_value=0, man_value=0.05, depth=depth, discharge=discharge, nwalkers=500000, niterations=120, output_step=20)
-                outfileslist=[discharge + ".020", discharge + ".040", discharge + ".060", discharge + ".080", discharge + ".100", discharge + ".120"]
-                outfiles= ','.join(outfileslist)
-                print("Exporting leaflet results")
-                # os.system("python /Users/smortop/Documents/GitHub/hydro-grass-viz/grass/r.out.leaflet/r.out.leaflet.py raster='{0}' output='/Users/smortop/Documents/GitHub/hydro-grass-viz/images/simwe'".format(outfiles))
+                if outfile not in complete:
+                    print("Reading external file %s" % outfile)
+                    inputFile = "/Users/smortop/Downloads/WakeCoNC_elevation_20944/" + file
+                    gscript.read_command('r.import', input=inputFile, output=outfile)
+                    # gscript.write_command('r.external.out', directory="/Users/smortop/Documents/GitHub/hydro-grass-viz/images/grassoutput", format="GTiff")
+                    print("Setting Computational Region")
+                    gscript.run_command('g.region', raster=outfile)
+                    dxOut="%s_dx" % outfile
+                    dyOut="%s_dy" % outfile
+                    print("Calculating dx dy")
+                    gscript.run_command('r.slope.aspect', elevation=outfile, dx=dxOut, dy=dyOut)
+                    depth="%s_wdp" % outfile
+                    discharge="%s_disch" % outfile
+                    print("Running r.sim.water")
+                    gscript.run_command('r.sim.water', dx=dxOut, dy=dyOut, elevation=outfile, rain_value=50, infil_value=0, man_value=0.05, depth=depth, discharge=discharge, nwalkers=500000, niterations=120, output_step=20)
+                    outfileslist=[discharge + ".020", discharge + ".040", discharge + ".060", discharge + ".080", discharge + ".100", discharge + ".120"]
+                    outfiles= ','.join(outfileslist)
+                    print("Exporting leaflet results")
+                    # os.system("python /Users/smortop/Documents/GitHub/hydro-grass-viz/grass/r.out.leaflet/r.out.leaflet.py raster='{0}' output='/Users/smortop/Documents/GitHub/hydro-grass-viz/images/simwe'".format(outfiles))
 
 
 if __name__ == '__main__':
     main()
 
 # 'D03_37_20171201_20160228_disch.120,D03_37_20079201_20160228_disch.120,D03_37_20170101_20160228_disch.120,D03_37_20171301_20160228_disch.120,D03_37_20079301_20160228_disch.120,D03_37_20172203_20160228_disch.120,D03_37_20079101_20160228_disch.120,D03_37_20171101_20160228_disch.120,D03_37_20170301_20160228_disch.120,D03_37_20172403_20160228_disch.120,D03_37_20170201_20160228_disch.120'
-# python r.out.leaflet.py raster='D03_37_20171201_20160228_disch.120' output='/Users/smortop/Documents/GitHub/hydro-grass-viz/images/simwe'
+# python r.out.leaflet/r.out.leaflet.py raster='D03_37_20079102_20160228_disch,D03_37_20170203_20160228_disch,D03_37_20170204_20160228_disch,D03_37_20170302_20160228_disch,D03_37_20171102_20160228_disch,D03_37_20172301_20160228_disch' output='/Users/smortop/Documents/GitHub/hydro-grass-viz/images'
