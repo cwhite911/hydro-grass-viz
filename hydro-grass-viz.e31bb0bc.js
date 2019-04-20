@@ -1026,7 +1026,12 @@ map.on('load', function () {
   }
 
   var levels = fetch("https://services1.arcgis.com/aT1T0pU1ZdpuDk1t/ArcGIS/rest/services/survey123_571499fe84ac4125abe48b793b9970a3_stakeholder/FeatureServer/0/query?f=json&returnGeometry=true&inSR=102100&outFields=*&outSR=4326&where=1=1", {
-    cache: "reload"
+    method: "GET",
+    cache: "no-cache" // mode: "cors",
+    // headers: {
+    //     "Content-Type": "application/json"
+    // }
+
   }).then(function (res) {
     return res.json();
   }).then(function (json) {
@@ -1157,6 +1162,14 @@ map.on('load', function () {
   //     }
   // },labelLayerId)
   // Add the data to your map as a layer
+
+  map.on('click', function (e) {
+    console.log("Click Event", e); // Single out the first found feature.
+
+    var bbox = [[e.point.x - 5, e.point.y - 5], [e.point.x + 5, e.point.y + 5]];
+    var features = map.queryRenderedFeatures(bbox, {});
+    console.log("Feature", features);
+  });
 });
 },{"./images/inundation_0.5.png":"images/inundation_0.5.png","./images/inundation_1.0.png":"images/inundation_1.0.png","./images/inundation_1.5.png":"images/inundation_1.5.png","./images/inundation_2.0.png":"images/inundation_2.0.png","./images/inundation_2.5.png":"images/inundation_2.5.png","./images/inundation_3.0.png":"images/inundation_3.0.png","./images/inundation_3.5.png":"images/inundation_3.5.png","./images/inundation_4.0.png":"images/inundation_4.0.png","./images/inundation_4.5.png":"images/inundation_4.5.png","./images/inundation_5.0.png":"images/inundation_5.0.png","./images/simwe/data_file":"images/simwe/data_file.js","./images/simwe/*.png":"images/simwe/*.png","./images/grassoutput/data_file":"images/grassoutput/data_file.js","./images/grassoutput/*.png":"images/grassoutput/*.png","@esri/arcgis-to-geojson-utils":"node_modules/@esri/arcgis-to-geojson-utils/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -1185,7 +1198,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57504" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62403" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
