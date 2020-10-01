@@ -31,9 +31,9 @@ const map = new mapboxgl.Map({
     zoom: 12,
     center: [-78.6319,35.7099],
     pitch: 45,
-    // style: 'mapbox://styles/ctwhite/cjtnhxudz2j4l1fs74h5hygce', //Custom
+    style: 'mapbox://styles/ctwhite/cjtnhxudz2j4l1fs74h5hygce', //Custom
     // style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g', //Hillshade
-    style: 'mapbox://styles/mapbox/satellite-v9',
+    // style: 'mapbox://styles/mapbox/satellite-v9',
     hash: true
 }).addControl(new mapboxgl.NavigationControl());
 
@@ -174,7 +174,7 @@ map.on('load', () => {
         "source": "dischAnimation",
         "type": "raster",
         "paint": {
-            "raster-opacity": 1,
+            "raster-opacity": 0.8,
             "raster-fade-duration": 2
         }
     });
