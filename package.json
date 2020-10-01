@@ -17,6 +17,7 @@
     "@turf/bbox-polygon": "6.0.1",
     "bulma": "0.7.4",
     "deck.gl": "6.4.0",
+    "dotenv": "^8.2.0",
     "mapbox-gl": "0.53.0-beta.1",
     "react": "16.7.0",
     "react-dom": "16.7.0",
@@ -24,6 +25,6 @@
     "react-mapbox-gl": "4.2.0"
   },
   "devDependencies": {
-    "parcel-bundler": "1.11.0"
+    "parcel-bundler": "^1.12.4"
   }
 }

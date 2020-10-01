@@ -45,13 +45,13 @@ def proj_to_wgs84(region):
     proc = gs.start_command('m.proj', input='-', separator=' , ',
                             flags='od',
                             stdin=gs.PIPE, stdout=gs.PIPE, stderr=gs.PIPE)
-    proc.stdin.write(proj_in)
+    proc.stdin.write(gs.encode(proj_in))
     proc.stdin.close()
     proc.stdin = None
     proj_out, errors = proc.communicate()
     if proc.returncode:
         raise RuntimeError("m.proj error: %s" % errors)
-    enws = proj_out.split(os.linesep)
+    enws = gs.decode(proj_out).split(os.linesep)
     elon, nlat, unused = enws[0].split(' ')
     wlon, slat, unused = enws[1].split(' ')
     return {'east': elon, 'north': nlat,
@@ -186,7 +186,6 @@ def export_png_in_projection(src_mapset_name, map_name, output_file,
             # which is enough now
             # TODO: unlike the other branch, this keeps the current
             # resolution which is not correct
-            print(tgt_region)
             set_region(tgt_region)
         else:
             # find out map extent to import everything

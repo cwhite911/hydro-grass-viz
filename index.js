@@ -12,6 +12,9 @@ import simwe from './images/simwe/data_file';
 import importedDischarge from './images/simwe/*.png';
 import dischAnimation from './images/grassoutput/data_file';
 import dischAnimationImages from './images/grassoutput/*.png';
+import itziFiles from './images/data_file'
+import itziImages from './images/*.png'
+import itziStats from "./images/nc_itzi_tutorial_watershed"
 
 // import React, {Component} from 'react';
 // import {render} from 'react-dom';
@@ -28,9 +31,13 @@ const map = new mapboxgl.Map({
     zoom: 12,
     center: [-78.6319,35.7099],
     pitch: 45,
-    style: 'mapbox://styles/ctwhite/cjtnhxudz2j4l1fs74h5hygce',
+    // style: 'mapbox://styles/ctwhite/cjtnhxudz2j4l1fs74h5hygce', //Custom
+    // style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g', //Hillshade
+    style: 'mapbox://styles/mapbox/satellite-v9',
     hash: true
 }).addControl(new mapboxgl.NavigationControl());
+
+
 
 //Convert Bounds to match mapbox gl source specs
 function grassBbox(bounds) {
@@ -137,67 +144,106 @@ map.on('load', () => {
         ]
      });
 
-    map.addLayer({
-        "id": "floodOverlay",
-        "source": "floodOverlay",
-        "type": "raster",
-        "paint": {
-            "raster-opacity": 0.85,
-            "raster-fade-duration": 0
-        }
-    },labelLayerId);
+    // map.addLayer({
+    //     "id": "floodOverlay",
+    //     "source": "floodOverlay",
+    //     "type": "raster",
+    //     "paint": {
+    //         "raster-opacity": 0.85,
+    //         "raster-fade-duration": 0
+    //     }
+    // },labelLayerId);
 
 
     // //Discharge GIF
     //Turned off for demo
-    // var currentDischargeImage = 0;
-    // function getDischargePath() {
-    //     return dischAnimationImages[dischAnimation[currentDischargeImage].title];
-    // }
+    var currentDischargeImage = 0;
 
-    // map.addSource("dischAnimation", {
-    //     type: 'image',
-    //     url: getDischargePath(),
-    //     coordinates: grassBbox(dischAnimation[0].bounds)
-    // });
+    function getDischargePath() {
+        return itziImages[itziFiles[currentDischargeImage].title];
+    }
 
-    // map.addLayer({
-    //     "id": "dischAnimation",
-    //     "source": "dischAnimation",
-    //     "type": "raster",
-    //     "paint": {
-    //         "raster-opacity": 0.60,
-    //         "raster-fade-duration": 2
-    //     }
-    // });
-    // console.log("dischAnimation", dischAnimation.length)
+    map.addSource("dischAnimation", {
+        type: 'image',
+        url: getDischargePath(),
+        coordinates: grassBbox(itziFiles[0].bounds)
+    });
+
+    map.addLayer({
+        "id": "dischAnimation",
+        "source": "dischAnimation",
+        "type": "raster",
+        "paint": {
+            "raster-opacity": 1,
+            "raster-fade-duration": 2
+        }
+    });
+    console.log("dischAnimation", itziFiles.length)
+
+
+    var months = itziFiles.map(i => i.title)
+
+     
+    function filterBy(currentDischargeImage) {
+        // var filters = ['==', 'month', month];
+        // map.setFilter('earthquake-circles', filters);
+        // map.setFilter('earthquake-labels', filters);
+        map.getSource("dischAnimation").updateImage({ url: itziImages[itziFiles[currentDischargeImage].title] })
+        // Set the label to the month
+        document.getElementById('month').textContent = itziFiles[currentDischargeImage].title;
+        var currentStats = itziStats[currentDischargeImage]
+        // sim_time,avg_timestep,#timesteps,boundary_vol,rain_vol,inf_vol,inflow_vol,losses_vol,drain_net_vol,domain_vol,created_vol,%error
+        Object.entries(currentStats).forEach(s =>  document.getElementById(s[0]).innerText = s[1])
+        // document.getElementById('sim_time').innerText = currentStats.sim_time
+        // document.getElementById('avg_timestep').innerText = currentStats.avg_timestep
+        // document.getElementById('#timesteps').innerText = currentStats['#timesteps']
+        // document.getElementById('boundary_vol').innerText = currentStats.boundary_vol
+        // document.getElementById('rain_vol').innerText = currentStats.rain_vol
+        // document.getElementById('inf_vol').innerText = currentStats.inf_vol
+        // document.getElementById('inflow_vol').innerText = currentStats.inflow_vol
+        // document.getElementById('losses_vol').innerText = currentStats.losses_vol
+        // document.getElementById('drain_net_vol').innerText = currentStats.drain_net_vol
+        // document.getElementById('domain_vol').innerText = currentStats.domain_vol
+        // document.getElementById('created_vol').innerText = currentStats.created_vol
+        // document.getElementById('%error').innerText = currentStats["%error"]
+        
+    }
+    filterBy(0)
+
+    document
+    .getElementById('slider')
+    .addEventListener('input', function (e) {
+        var month = parseInt(e.target.value, 10);
+        filterBy(month);
+    });
+
     // setInterval(function() {
     //     currentDischargeImage = currentDischargeImage + 1;
-    //     if (currentDischargeImage >= dischAnimation.length) {
+    //     if (currentDischargeImage >= itziFiles.length) {
     //         currentDischargeImage = 0;
     //     }
     //     map.getSource("dischAnimation").updateImage({ url: getDischargePath() });
     // }, 200);
    
     
-        simwe.forEach(element => {
-            console.log(importedDischarge[element.title])
-            map.addSource(element.title, {
-                type: 'image',
-                url: importedDischarge[element.title],
-                coordinates: grassBbox(element.bounds)
-            });
+        // simwe.forEach(element => {
+        //     console.log(importedDischarge[element.title])
+        //     map.addSource(element.title, {
+        //         type: 'image',
+        //         url: importedDischarge[element.title],
+        //         coordinates: grassBbox(element.bounds)
+        //     });
     
-            map.addLayer({
-                "id": element.title,
-                "source": element.title,
-                "type": "raster",
-                "paint": {
-                    "raster-opacity": 0.60,
-                    "raster-fade-duration": 2
-                }
-            },labelLayerId);
-        });
+        //     map.addLayer({
+        //         "id": element.title,
+        //         "source": element.title,
+        //         "type": "raster",
+        //         "paint": {
+        //             "raster-opacity": 0.60,
+        //             "raster-fade-duration": 2
+        //         }
+        //     },labelLayerId);
+        // });
 
     function buildLevelList(data) {
         if (data.features.length !== levels.length) {
@@ -409,7 +455,6 @@ map.on('load', () => {
             }
         }, labelLayerId);
 
-        
         // map.addLayer({
         //     'id': 'water-line-layer',
         //     'source': 'composite',
