@@ -7284,9 +7284,10 @@ var map = new mapboxgl.Map({
   zoom: 12,
   center: [-78.6319, 35.7099],
   pitch: 45,
-  // style: 'mapbox://styles/ctwhite/cjtnhxudz2j4l1fs74h5hygce', //Custom
+  style: 'mapbox://styles/ctwhite/cjtnhxudz2j4l1fs74h5hygce',
+  //Custom
   // style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g', //Hillshade
-  style: 'mapbox://styles/mapbox/satellite-v9',
+  // style: 'mapbox://styles/mapbox/satellite-v9',
   hash: true
 }).addControl(new mapboxgl.NavigationControl()); //Convert Bounds to match mapbox gl source specs
 
@@ -7411,7 +7412,7 @@ map.on('load', function () {
     "source": "dischAnimation",
     "type": "raster",
     "paint": {
-      "raster-opacity": 1,
+      "raster-opacity": 0.8,
       "raster-fade-duration": 2
     }
   });
@@ -7688,7 +7689,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45671" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45453" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
