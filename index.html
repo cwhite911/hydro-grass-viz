@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>TomorrowNow</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js"></script>
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
     <style>body {
         color: #404040;
         font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
@@ -237,14 +237,11 @@ cursor: ew-resize;
           
     </div>
     <div id="map" class="map pad2"></div>
-<<<<<<< HEAD
-    <canvas id="canvas" width="400" height="400" style="display:none;"></canvas>
-=======
     <div class="map-overlay top pad2">
       <div class="map-overlay-inner">
-      <h2>Itzi Model Run (5m) Resolution</h2>
+      <h2>Itzi Model Run (5m)</h2>
       <label id="month"></label>
-      <input id="slider" type="range" min="0" max="300" step="1" value="0">
+      <input id="slider" type="range" min="0" max="300" step="10" value="0">
    
       <div>
         <small>Simulation : </small><label id="sim_time"></label>
@@ -271,7 +268,6 @@ cursor: ew-resize;
       </div>
       </div>
 
->>>>>>> a1f355ddcf9f97dcf1466a433bd780c5758eff63
 
 <script src="/hydro-grass-viz.e31bb0bc.js"></script>
 <!-- <script type="text/javascript">
