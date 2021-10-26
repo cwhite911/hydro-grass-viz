@@ -1,25 +1,27 @@
-## How to Host Your Animated GRASS simulations with MapBoxGL JS and GitHub
+# How to Host Your Animated GRASS simulations with MapBoxGL JS and GitHub
 
 ## Requirements
+
 * [GitHub Account](https://github.com/)
 * [MapBox Account](https://www.mapbox.com/)
 * [GRASS GIS - v7.6.0](https://grass.osgeo.org/download/)
 
 ## GitHub
+
 1. Create [GitHub Account](https://github.com/) 
 2. Create new [GitHub Repository](https://help.github.com/articles/creating-a-new-repository) 
-3. G
 
 ## GRASS
+
 1. Download GRASS 7.6.0
-1. Run your favorite simulation
-2. Use r.out.leaflet to generate bbox and pngs
+2. Run your favorite simulation
+3. Use r.out.leaflet to generate bbox and pngs
 
 ## MapBox
+
 1. Create account
 2. Get public token
-3. go to https://docs.mapbox.com/mapbox-gl-js/example/animate-images/
-4. Create an empty file called index.html and copy and paste the following code into the document. [Original Code From MapBox](https://docs.mapbox.com/mapbox-gl-js/example/animate-images/)
+3. Create an empty file called index.html and copy and paste the following code into the document. [Original Code From MapBox](https://docs.mapbox.com/mapbox-gl-js/example/animate-images/)
 
 ```html
 <!DOCTYPE html>
@@ -87,6 +89,3 @@ map.on('load', function() {
 </body>
 </html>
 ```
-
-
-

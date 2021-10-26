@@ -8,10 +8,6 @@ import flood_3_5 from './images/inundation_3.5.png';
 import flood_4_0 from './images/inundation_4.0.png';
 import flood_4_5 from './images/inundation_4.5.png';
 import flood_5_0 from './images/inundation_5.0.png';
-import simwe from './images/simwe/data_file';
-import importedDischarge from './images/simwe/*.png';
-import dischAnimation from './images/grassoutput/data_file';
-import dischAnimationImages from './images/grassoutput/*.png';
 import itziFiles from './images/data_file'
 import itziImages from './images/*.png'
 import itziStats from "./images/nc_itzi_tutorial_watershed"
@@ -194,18 +190,6 @@ map.on('load', () => {
         var currentStats = itziStats[currentDischargeImage]
         // sim_time,avg_timestep,#timesteps,boundary_vol,rain_vol,inf_vol,inflow_vol,losses_vol,drain_net_vol,domain_vol,created_vol,%error
         Object.entries(currentStats).forEach(s =>  document.getElementById(s[0]).innerText = s[1])
-        // document.getElementById('sim_time').innerText = currentStats.sim_time
-        // document.getElementById('avg_timestep').innerText = currentStats.avg_timestep
-        // document.getElementById('#timesteps').innerText = currentStats['#timesteps']
-        // document.getElementById('boundary_vol').innerText = currentStats.boundary_vol
-        // document.getElementById('rain_vol').innerText = currentStats.rain_vol
-        // document.getElementById('inf_vol').innerText = currentStats.inf_vol
-        // document.getElementById('inflow_vol').innerText = currentStats.inflow_vol
-        // document.getElementById('losses_vol').innerText = currentStats.losses_vol
-        // document.getElementById('drain_net_vol').innerText = currentStats.drain_net_vol
-        // document.getElementById('domain_vol').innerText = currentStats.domain_vol
-        // document.getElementById('created_vol').innerText = currentStats.created_vol
-        // document.getElementById('%error').innerText = currentStats["%error"]
         
     }
     filterBy(0)
@@ -216,34 +200,6 @@ map.on('load', () => {
         var month = parseInt(e.target.value, 10);
         filterBy(month);
     });
-
-    // setInterval(function() {
-    //     currentDischargeImage = currentDischargeImage + 1;
-    //     if (currentDischargeImage >= itziFiles.length) {
-    //         currentDischargeImage = 0;
-    //     }
-    //     map.getSource("dischAnimation").updateImage({ url: getDischargePath() });
-    // }, 200);
-   
-    
-        // simwe.forEach(element => {
-        //     console.log(importedDischarge[element.title])
-        //     map.addSource(element.title, {
-        //         type: 'image',
-        //         url: importedDischarge[element.title],
-        //         coordinates: grassBbox(element.bounds)
-        //     });
-    
-        //     map.addLayer({
-        //         "id": element.title,
-        //         "source": element.title,
-        //         "type": "raster",
-        //         "paint": {
-        //             "raster-opacity": 0.60,
-        //             "raster-fade-duration": 2
-        //         }
-        //     },labelLayerId);
-        // });
 
     function buildLevelList(data) {
         if (data.features.length !== levels.length) {
@@ -315,26 +271,7 @@ map.on('load', () => {
                     "circle-radius": 10,
                     "circle-color": "#FFE100",
                     "circle-opacity": 0.8
-                    // 'fill-extrusion-color': '#FFE100',
-                    // use an 'interpolate' expression to add a smooth transition effect to the
-                    // buildings as the user zooms in
-                    // 'fill-extrusion-height': 100,
-                    // 'fill-extrusion-base': [
-                    //     "interpolate", ["linear"], ["zoom"],
-                    //     14, 0,
-                    //     14.05, 0
-                    // ],
-                    // 'fill-extrusion-opacity': 0.8
                     }
-                    // "type": "symbol",
-                    // "layout": {
-                    //     "icon-image": "star-15",
-                    //     // "text-field": "{title}",
-                    //     "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                    //     "text-offset": [0, 0.6],
-                    //     "text-anchor": "top",
-                    //     "icon-color": "#e00000"
-                    //     }
                 });
 
                 map.addLayer({
@@ -343,14 +280,6 @@ map.on('load', () => {
                     "source": "levels",
                     "maxzoom": 9,
                     "paint": {
-                    // Increase the heatmap weight based on frequency and property magnitude
-                    // "heatmap-weight": [
-                    // "interpolate",
-                    // ["linear"],
-                    // ["get", "mag"],
-                    // 0, 0,
-                    // 6, 1
-                    // ],
                     // Increase the heatmap color weight weight by zoom level
                     // heatmap-intensity is a multiplier on top of heatmap-weight
                     "heatmap-intensity": [
@@ -454,23 +383,5 @@ map.on('load', () => {
             'fill-extrusion-opacity': 0.7
             }
         }, labelLayerId);
-
-        // map.addLayer({
-        //     'id': 'water-line-layer',
-        //     'source': 'composite',
-        //     'source-layer': 'water',
-        //     'type': 'line',
-        //     'minzoom': 15,
-        //     'paint': {
-        //         'fill-color': '#2ea3f2'
-        //     }
-        // },labelLayerId)
-
-       // Add the data to your map as a layer
- 
-   
-
-    
-  
 
 });
